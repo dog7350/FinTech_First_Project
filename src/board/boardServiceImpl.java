@@ -9,30 +9,45 @@ public class boardServiceImpl implements boardService {
 		if (instance == null) instance = new boardServiceImpl();
 		return instance;
 	}
-
+	
 	@Override
 	public void boardCreate() {
 		
 	}
-
+	
+	public void boardFileRead() {
+		
+	}
+	
+	public void boardFileWrite() {
+		
+	}
+	
+	public void boardDBSend() {
+		
+	}
+	
 	@Override
 	public void boardModify() {
 		
 	}
-
+	
 	@Override
 	public void boardDelete() {
 		
 	}
-
+	
 	@Override
 	public ArrayList<boardDTO> boardList() {
 		return null;
 	}
-
+	
 	@Override
 	public boardDTO boardSearch() {
+		
 		return null;
 	}
+
+	
 
 }
