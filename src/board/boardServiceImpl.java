@@ -47,6 +47,10 @@ public class boardServiceImpl implements boardService {
 		
 		return null;
 	}
+	@Override
+	public void boardContent() {
+		
+	}
 
 	
 
