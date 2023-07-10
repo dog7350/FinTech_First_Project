@@ -49,7 +49,7 @@ public class controller {
 		boolean flag = true;
 		
 		while (flag) {
-			screen.clear();
+			//screen.clear();
 			System.out.print("join : 회원가입\nlogin : 로그인\nmodify : 정보 수정\nexit : 회원 탈퇴\nreturn : 돌아가기\n명령어 입력\n>> ");
 			switch (sc.next()) {
 				case "join" :
@@ -134,13 +134,19 @@ public class controller {
 		
 		while (flag) {
 			screen.clear();
-			System.out.print("out : 회원 강퇴\nmanager : 관리자 임명\nboardD : 게시판 삭제\ncommentD : 댓글 삭제\nreturn : 돌아가기\n명령어 입력\n>> ");
+			System.out.print("out : 회원 강퇴\nmanager : 관리자 임명\nmemberL : 전체 회원 조회\nmemberS : 회원 검색\nboardD : 게시판 삭제\ncommentD : 댓글 삭제\nreturn : 돌아가기\n명령어 입력\n>> ");
 			switch (sc.next()) {
 				case "out" :
 					member.memberOut();
 					break;
 				case "manager" :
 					member.memberManager();
+					break;
+				case "memberL":
+					member.memberList();
+					break;
+				case "memberS":
+					member.memberSearch();
 					break;
 				case "boardD" :
 					board.boardDelete();

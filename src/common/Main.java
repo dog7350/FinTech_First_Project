@@ -8,7 +8,7 @@ public class Main {
 		boolean flag = true;
 		
 		while (flag) {
-			screen.clear();
+			//screen.clear();
 			System.out.print("cli : 콘솔\ngui : 그래픽\nexit : 프로그램 종료\n명령어 입력\n>> ");
 			switch (sc.next()) {
 				case "cli" :
