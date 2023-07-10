@@ -91,7 +91,7 @@ public class controller {
 					board.boardList();
 					break;
 				case "search" :
-					board.boardSearch();
+					board.boardSearch(0);
 					break;
 				case "return" :
 					flag = false;
