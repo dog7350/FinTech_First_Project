@@ -8,13 +8,21 @@ import gui.guiServiceImpl;
 import member.memberServiceImpl;
 
 public class controller {
+	private static controller instance = null;
+	private controller() {}
+	public static controller getInstance() {
+		if (instance == null) instance = new controller();
+		return instance;
+	}
+	
 	Scanner sc = new Scanner(System.in);
 	memberServiceImpl member = memberServiceImpl.getInstance();
 	boardServiceImpl board = boardServiceImpl.getInstance();
 	commentServiceImpl comment = commentServiceImpl.getInstance();
+	public guiServiceImpl gui;
 	
 	public void guiStart() {
-		guiServiceImpl gui = new guiServiceImpl();
+		gui = new guiServiceImpl();
 		gui.run();
 	}
 	
