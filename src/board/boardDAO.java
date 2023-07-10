@@ -46,15 +46,17 @@ public class boardDAO {
 	
 	public ArrayList<boardDTO> boardList() {
 		String sql = "SELECT * FROM board";
-		ArrayList<boardDTO> list = null;
+		ArrayList<boardDTO> list = new ArrayList<>();
 		try {
 			ps = db.getConnect().prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 
-				boardDTO d = new boardDTO(rs.getInt("BNO"), rs.getString("B_WRITER"),rs.getString("B_TITLE"),rs.getString("B_COMTENT"),
-						rs.getDate("B_TIME"),rs.getInt("INQUIRY"),rs.getInt("REPORT"));
+				boardDTO d = new boardDTO(rs.getInt("bno"), rs.getString("b_writer"),rs.getString("b_title"),rs.getString("b_content"),
+						rs.getDate("b_time"),rs.getInt("inquiry"),rs.getInt("report"));
+				
 				list.add(d);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,7 +67,7 @@ public class boardDAO {
 
 	
 	public int modify(boardDTO md) {
-		String sql = "UPDATE BOARD SET B_TITLE = ?,B_CONTANT = ? where b_writer = ?";
+		String sql = "UPDATE BOARD SET B_TITLE = ?,B_CONTANT = ? WHERE B_WRITER = ?";
 		int result = 0;
 		try {
 			ps = db.getConnect().prepareStatement(sql);
@@ -103,8 +105,8 @@ public class boardDAO {
 			ps = db.getConnect().prepareStatement(sql);
 			rs = ps.executeQuery();
 			if(rs.next()) {
-				dto = new boardDTO(rs.getInt("BNO"), rs.getString("B_WRITER"),rs.getString("B_TITLE"),rs.getString("B_COMTENT"),
-						rs.getDate("B_TIME"),rs.getInt("INQUIRY"),rs.getInt("REPORT"));
+				dto = new boardDTO(rs.getInt("bno"), rs.getString("b_writer"),rs.getString("b_title"),rs.getString("b_content"),
+						rs.getDate("b_time"),rs.getInt("inquiry"),rs.getInt("report"));
 				
 			}
 		} catch (Exception e) {

@@ -45,7 +45,7 @@ public class boardServiceImpl implements boardService {
 		dto.setBno(num);
 		Date date = new Date();
 		dto.setbTime(date);
-
+		
 
 		System.out.println("해당 게시글을 저장할 곳을 선택해주세요 : ");
 		System.out.println("1.C드라이브");
