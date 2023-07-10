@@ -16,7 +16,7 @@ public class guiFrame extends Frame {
 		
 		frame.setTitle("게시판 회원 관리 GUI");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 40));
+		frame.setLayout(new BorderLayout(30, 20));
 
         frame.setLocation(1000, 200);
         frame.setPreferredSize(new Dimension(770, 500));
