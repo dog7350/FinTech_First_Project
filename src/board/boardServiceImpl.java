@@ -130,7 +130,7 @@ public class boardServiceImpl implements boardService {
 
 	@Override
 	public void boardModify() {
-		System.out.println("삭제할 게시글 번호를 입력하세요.");
+		System.out.println("수정할 게시글 번호를 입력하세요.");
 		int bno = sc.nextInt();
 		dto = dao.search(bno);
 		if (myInfo.getInstance().id.equals(dto.getbWriter()) || myInfo.getInstance().admin == 1) {
