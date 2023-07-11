@@ -1,10 +1,7 @@
 package board;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Date;
+import java.sql.*;
+import java.util.*;
 
 import common.DBConnect;
 import common.myInfo;
@@ -19,7 +16,7 @@ public class boardDAO {
 	}
 
 	public int insert(boardDTO dto) {
-		String sql = "insert into BOARD(b_writer, b_title, b_content, b_time, inquiry, report) values(?, ?, ?, sysdate, 0, 0)";
+		String sql = "INSERT INTO board VALUES(1, ?, ?, ?, sysdate, 0, 0)";
 		int result = 0;
 		
 

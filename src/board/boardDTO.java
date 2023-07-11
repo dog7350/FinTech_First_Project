@@ -1,11 +1,6 @@
 package board;
 
 
-
-
-
-
-
 import java.util.Date;
 
 import oracle.sql.*;

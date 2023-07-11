@@ -1,5 +1,6 @@
 package board;
 
+
 import java.util.*;
 
 public interface boardService {

@@ -1,5 +1,6 @@
 package member;
 
+
 public class memberDTO {
 	private String id, pw, name, addr, phone, email;
 	private int admin;

@@ -1,7 +1,10 @@
 package member;
 
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import common.myInfo;
 
 public class memberServiceImpl implements memberService {
 	private static memberServiceImpl instance = null;
@@ -19,7 +22,7 @@ public class memberServiceImpl implements memberService {
 
 	@Override //회원가입(id,pw, 이름, 주소, 전화번호, email,관리자여부)
 	public void memberJoin() {
-						
+		dto = new memberDTO();
 		System.out.println(" --- 회원가입 ---");
 		System.out.println("ID입력>>");
 		id = sc.next();
@@ -55,7 +58,10 @@ public class memberServiceImpl implements memberService {
 		pw=sc.next();
 		
 		String result = dao.login(id, pw);
-		System.out.println(result);		
+		System.out.println(result);
+		
+		memberDTO dto = dao.search(id);
+		myInfo.getInstance().setInstance(dto.getId(), dto.getPw(), dto.getName(), dto.getAddr(), dto.getPhone(), dto.getEmail(), dto.getAdmin());
 	}
 
 	@Override //정보수정
@@ -163,7 +169,7 @@ public class memberServiceImpl implements memberService {
 		System.out.println("이메일: "+dto.getEmail());
 		System.out.println("관리자여부(0:일반사용자, 1:관리자): "+dto.getAdmin());
 		
-		return null;
+		return dto;
 	}
 	
 	public memberDTO search(String id) {

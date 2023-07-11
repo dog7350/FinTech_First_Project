@@ -1,5 +1,6 @@
 package comment;
 
+
 public class commentDTO {
 	private int bno, cno;
 	private String cWriter, cContent;

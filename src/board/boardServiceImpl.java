@@ -1,5 +1,6 @@
 package board;
 
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -20,16 +21,18 @@ import oracle.jdbc.connector.OracleConnectionRequestInfo;
 
 public class boardServiceImpl implements boardService {
 	private static boardServiceImpl instance = null;
-	private boardServiceImpl() {}
+	private boardServiceImpl() {
+		dao = new boardDAO();
+	}
 	public static boardServiceImpl getInstance() {
 		if (instance == null) instance = new boardServiceImpl();
 		return instance;
 	}
 	Scanner sc = new Scanner(System.in);
 
-	boardDTO dto = new boardDTO();
-	boardDAO dao = new boardDAO();
+	boardDAO dao = null;
 	myInfo info = myInfo.getInstance(); 
+	boardDTO dto = new boardDTO();
 
 	ArrayList<boardDTO> list;
 	boolean flag = true;

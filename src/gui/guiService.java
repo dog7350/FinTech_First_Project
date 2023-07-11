@@ -1,5 +1,6 @@
 package gui;
 
+
 public interface guiService {
 	public void mainDisplay();
 	public void memberDisplay();
