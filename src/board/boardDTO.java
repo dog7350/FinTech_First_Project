@@ -1,14 +1,22 @@
 package board;
 
+
+
+
+
+
+
+import java.util.Date;
+
 import oracle.sql.*;
 
 public class boardDTO {
 	private int bno, inquiry, report;
 	private String bWriter, bTitle, bContent;
-	private DATE bTime;
+	private Date bTime;
 	
 	public boardDTO() {}
-	public boardDTO(int bno, String bWriter, String bTitle, String bContent, DATE bTime, int inquiry, int report) {
+	public boardDTO(int bno, String bWriter, String bTitle, String bContent, Date bTime, int inquiry, int report) {
 		this.bno = bno;
 		this.bWriter = bWriter;
 		this.bTitle = bTitle;
@@ -36,6 +44,6 @@ public class boardDTO {
 	public String getbContent() { return bContent; }
 	public void setbContent(String bContent) { this.bContent = bContent; }
 	
-	public DATE getbTime() { return bTime; }
-	public void setbTime(DATE bTime) { this.bTime = bTime; }
+	public Date getbTime() { return bTime; }
+	public void setbTime(Date bTime) { this.bTime = bTime; }
 }
