@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.*;
+import java.util.concurrent.Flow;
+
 import javax.swing.*;
 
 public class guiServiceImpl extends Thread implements guiService {
@@ -72,22 +74,35 @@ public class guiServiceImpl extends Thread implements guiService {
 		Container menu = new Container();
 		menu.setLayout(new FlowLayout(FlowLayout.LEFT));
 		gui.getCon().add(menu, BorderLayout.NORTH);
+		JScrollPane scroll = new JScrollPane();
+		scroll.setLayout(new ScrollPaneLayout());
+		gui.getCon().add(scroll, BorderLayout.CENTER);
 		
+		SCon.setLayout(new FlowLayout(FlowLayout.LEFT));
+		scroll.setViewportView(SCon);
+		Container View = new Container();
+		View.setLayout(new GridLayout(0, 1));
+		SCon.add(View, BorderLayout.WEST);
 		// list load, content = modify, delete
 		
 		JButton returnBtn = new JButton("돌아가기");
 		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
 		menu.add(returnBtn);
 		
-		JButton createBtn = new JButton("게시글 작성");
-		createBtn.addActionListener(btnFunc.getInstance().boardCreateBtn);
 		JTextField searchBar = new JTextField("", 25);
 		JButton searchBtn = new JButton("게시글 검색");
 		searchBtn.addActionListener(btnFunc.getInstance().boardSearchBtn);
+		JButton createBtn = new JButton("게시글 작성");
+		createBtn.addActionListener(btnFunc.getInstance().boardCreateBtn);
+		
+		for (int i = 0; i < 50; i++) {
+			JButton btn = new JButton("TEST! : " + i);
+			View.add(btn);
+		}
 		
 		menu.add(createBtn);
-		menu.add(searchBar);
 		menu.add(searchBtn);
+		menu.add(searchBar);
 		
 		gui.getCon().revalidate();
 		gui.getCon().repaint();
@@ -151,26 +166,34 @@ public class guiServiceImpl extends Thread implements guiService {
 	public void adminDisplay() {
 		gui.getCon().removeAll();
 		Container menu = new Container();
-		menu.setLayout(new FlowLayout(FlowLayout.CENTER));
+		menu.setLayout(new GridLayout(0, 2));
 		gui.getCon().add(menu, BorderLayout.CENTER);
+		
+		JButton outBtn = new JButton("회원 강퇴");
+		outBtn.addActionListener(btnFunc.getInstance().adminMemberBtn);
+		JTextField outTxt = new JTextField("", 25);
+		JButton managerBtn = new JButton("관리자 임명");
+		managerBtn.addActionListener(btnFunc.getInstance().adminManagerBtn);
+		JTextField managerTxt = new JTextField("", 25);
+		JButton boardDeleteBtn = new JButton("게시글 삭제");
+		boardDeleteBtn.addActionListener(btnFunc.getInstance().boardDeleteBtn);
+		JTextField boardTxt = new JTextField("", 25);
+		JButton commentDeleteBtn = new JButton("댓글 삭제");
+		commentDeleteBtn.addActionListener(btnFunc.getInstance().commentDeleteBtn);
+		JTextField commentTxt = new JTextField("", 25);
+
+		menu.add(outBtn);
+		menu.add(outTxt);
+		menu.add(managerBtn);
+		menu.add(managerTxt);
+		menu.add(boardDeleteBtn);
+		menu.add(boardTxt);
+		menu.add(commentDeleteBtn);
+		menu.add(commentTxt);
 		
 		JButton returnBtn = new JButton("돌아가기");
 		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
 		menu.add(returnBtn);
-		
-		JButton outBtn = new JButton("회원 강퇴");
-		outBtn.addActionListener(btnFunc.getInstance().adminMemberBtn);
-		JButton managerBtn = new JButton("관리자 임명");
-		managerBtn.addActionListener(btnFunc.getInstance().adminManagerBtn);
-		JButton boardDeleteBtn = new JButton("게시글 삭제");
-		boardDeleteBtn.addActionListener(btnFunc.getInstance().boardDeleteBtn);
-		JButton commentDeleteBtn = new JButton("댓글 삭제");
-		commentDeleteBtn.addActionListener(btnFunc.getInstance().commentDeleteBtn);
-
-		menu.add(outBtn);
-		menu.add(managerBtn);
-		menu.add(boardDeleteBtn);
-		menu.add(commentDeleteBtn);
 		
 		gui.getCon().revalidate();
 		gui.getCon().repaint();
