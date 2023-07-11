@@ -11,6 +11,6 @@ public interface boardService {
 	public void boardModify(); // 게시글 수정
 	public void boardDelete(); // 게시글 삭제
 	public ArrayList<boardDTO> boardList(); // 게시글 목록
-	public boardDTO boardSearch(int bno); // 게시글 검색
+	public boardDTO boardSearch(); // 게시글 검색
 	
 }

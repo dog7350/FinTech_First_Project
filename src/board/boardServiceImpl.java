@@ -154,7 +154,7 @@ public class boardServiceImpl implements boardService {
 
 	void dtoPrint(boardDTO d) {
 		System.out.print("글번호\t");
-		System.out.print("제목\t");
+		System.out.print("제목\t\t");
 		System.out.print("작성자\t");
 		System.out.println("작성시간\t");
 
@@ -168,15 +168,15 @@ public class boardServiceImpl implements boardService {
 		list = dao.boardList();
 		int num2 =10;
 		int num = 1;
+
+		for (boardDTO d : list) {
+			dtoPrint(d);
+			if (num > num2) {
+				break;
+			}else num++;
+
+		}
 		while(flag) {
-			for (boardDTO d : list) {
-				dtoPrint(d);
-				if (num > num2) {
-					break;
-				}else num++;
-
-			}
-
 			System.out.println("(p)다음페이지\t(n)이전페이지\t(s)제목으로 글 조회하기\t(r)되돌아가기");
 			String cmd = sc.next();
 
@@ -209,6 +209,7 @@ public class boardServiceImpl implements boardService {
 				for (boardDTO d : list) {
 					dtoPrint(d);
 				}
+
 			}
 			break;
 
@@ -228,22 +229,17 @@ public class boardServiceImpl implements boardService {
 	}
 
 	@Override
-	public boardDTO boardSearch(int bno) {
-		dto = dao.search(bno);
-
-		return dto;
-	}
-
-	@Override
-	public void boardContent() {
+	public boardDTO boardSearch() {
+		
 		System.out.println("검색 글 번호입력: ");
-		dto = boardSearch(sc.nextInt());
+		int bno = sc.nextInt();
+		dto = dao.search(bno);
 		if(dto == null) {
 			System.out.println("존재하지 않는 글 입니다.");
 		}else {
 			System.out.print("글번호\t");
-			System.out.print("제목\t");
-			System.out.print("작성시간\t");
+			System.out.print("제목\t\t");
+			System.out.print("작성시간\t\t");
 			System.out.print("조회수\t");
 			System.out.println("신고수");
 
@@ -252,9 +248,33 @@ public class boardServiceImpl implements boardService {
 			System.out.print(dto.getbTime()+"\t");
 			System.out.print(dto.getInquiry()+"\t");
 			System.out.println(dto.getReport());
+		}
+		return dto;
+
+	}
+
+	@Override
+	public void boardContent() {
+		System.out.println("검색 글 번호입력: ");
+		int bno = sc.nextInt();
+		boardDTO bto = dao.search(bno);
+		if(bto == null) {
+			System.out.println("존재하지 않는 글 입니다.");
+		}else {
+			System.out.print("글번호\t");
+			System.out.print("제목\t");
+			System.out.print("작성시간\t");
+			System.out.print("조회수\t");
+			System.out.println("신고수");
+
+			System.out.print(bto.getBno()+"\t");
+			System.out.print(bto.getbTitle()+"\t");
+			System.out.print(bto.getbTime()+"\t");
+			System.out.print(bto.getInquiry()+"\t");
+			System.out.println(bto.getReport());
 
 			System.out.println("내용");
-			System.out.println(dto.getbContent());
+			System.out.println(bto.getbContent());
 		}
 
 
