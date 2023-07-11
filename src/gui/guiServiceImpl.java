@@ -77,12 +77,10 @@ public class guiServiceImpl extends Thread implements guiService {
 		JScrollPane scroll = new JScrollPane();
 		scroll.setLayout(new ScrollPaneLayout());
 		gui.getCon().add(scroll, BorderLayout.CENTER);
-		
-		SCon.setLayout(new FlowLayout(FlowLayout.LEFT));
-		scroll.setViewportView(SCon);
+
 		Container View = new Container();
 		View.setLayout(new GridLayout(0, 1));
-		SCon.add(View, BorderLayout.WEST);
+		scroll.setViewportView(View);
 		// list load, content = modify, delete
 		
 		JButton returnBtn = new JButton("돌아가기");
