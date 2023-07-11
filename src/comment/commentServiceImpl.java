@@ -36,7 +36,7 @@ public class commentServiceImpl implements commentService {
 		
 		if(result == 1)
 			System.out.println("댓글이 생성되었습니다.");
-		else System.out.println("댓글 생성에 실패하였습니다.");
+		else System.out.println("댓글 생성 실패!!!");
 	}
 
 	@Override		// 댓글 수정
@@ -51,7 +51,7 @@ public class commentServiceImpl implements commentService {
 		
 		if(result == 1)
 			System.out.println("댓글이 수정되었습니다.");
-		else System.out.println("댓글 수정에 실패하였습니다.");
+		else System.out.println("댓글 수정 실패!!!");
 	}
 
 	@Override		// 댓글 삭제
@@ -64,7 +64,7 @@ public class commentServiceImpl implements commentService {
 		
 		if(result == 1)
 			System.out.println("댓글이 삭제되었습니다.");
-		else System.out.println("댓글 삭제에 실패하였습니다.");
+		else System.out.println("댓글 삭제 실패!!!");
 	}
 
 	@Override		// 해당 게시글 댓글 목록
@@ -73,30 +73,29 @@ public class commentServiceImpl implements commentService {
 		bno = sc.nextInt();
 		
 		ArrayList<commentDTO> list = dao.cmtList(bno);
-		System.out.println("=============");
+		System.out.println("===========================================");
 		for(commentDTO d : list) {
-			System.out.println(d.getBno());
-			System.out.println(d.getCno());
-			System.out.println(d.getcWriter());
-			System.out.println(d.getcContent());
-			System.out.println("--------------------");
+			System.out.println(d.getCno()+". "+d.getcWriter()+" : "+d.getcContent());
+			System.out.println("-------------------------------------------");
 		}
 		return null;
 	}
 
 	@Override		// 댓글 검색 (관리자)
 	public commentDTO cmtSearch() {
+		//관리자 여부 확인 필요
 		System.out.print("작성자 입력 : ");
 		cWriter = sc.next();
 		ArrayList<commentDTO> list = dao.cmtSearch(cWriter);
-		System.out.println("=============");
+		System.out.println("===========================================");
+		System.out.println("게시글 번호\t댓글 번호\t 작성자\t댓글 내용");
 		for(commentDTO d : list) {
-			System.out.println(d.getBno());
-			System.out.println(d.getCno());
-			System.out.println(d.getcWriter());
-			System.out.println(d.getcContent());
-			System.out.println("--------------------");
+			System.out.println("-------------------------------------------");
+			System.out.println(d.getBno()+"\t\t"+d.getCno()+"\t "+d.getcWriter()+"\t"+d.getcContent());
 		}
+		System.out.println("==========================================="); 
 		return null;
 	}
+
 }
+
