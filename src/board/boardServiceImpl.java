@@ -205,7 +205,7 @@ public class boardServiceImpl implements boardService {
 			case "s" :
 			{
 				System.out.print("제목을 입력해주세요 : ");
-				ArrayList<boardDTO> list = dao.search2(sc.next());
+				ArrayList<boardDTO> list = dao.titleSearch(sc.next());
 				for (boardDTO d : list) {
 					dtoPrint(d);
 				}

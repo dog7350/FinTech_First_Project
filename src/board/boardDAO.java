@@ -118,7 +118,7 @@ public class boardDAO {
 		
 		
 	}
-	public ArrayList<boardDTO> search2(String b_title) {
+	public ArrayList<boardDTO> titleSearch(String b_title) {
 		ArrayList<boardDTO> list = new ArrayList<>();
 		String sql = "SELECT * FROM board WHERE b_title LIKE '%"+b_title+"%'";
 		try {
