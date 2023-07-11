@@ -67,13 +67,13 @@ public class boardDAO {
 
 	
 	public int modify(boardDTO md) {
-		String sql = "UPDATE BOARD SET B_TITLE = ?,B_CONTANT = ? WHERE B_WRITER = ?";
+		String sql = "UPDATE BOARD SET B_TITLE = ?,B_CONTANT = ?";
 		int result = 0;
 		try {
 			ps = db.getConnect().prepareStatement(sql);
 			ps.setString(1, md.getbTitle());
 			ps.setString(2, md.getbContent());
-			ps.setString(3, md.getbWriter());
+			
 			
 			
 			result = ps.executeUpdate();
