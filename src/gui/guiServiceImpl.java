@@ -44,6 +44,10 @@ public class guiServiceImpl extends Thread implements guiService {
 		menu.setLayout(new FlowLayout(FlowLayout.CENTER));
 		gui.getCon().add(menu, BorderLayout.CENTER);
 		
+		JButton returnBtn = new JButton("돌아가기");
+		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
+		menu.add(returnBtn);
+		
 		JButton joinBtn = new JButton("회원가입");
 		joinBtn.addActionListener(btnFunc.getInstance().memberJoinBtn);
 		JButton loginBtn = new JButton("로그인");
@@ -58,10 +62,6 @@ public class guiServiceImpl extends Thread implements guiService {
 		menu.add(modifyBtn);
 		menu.add(exitBtn);
 		
-		JButton returnBtn = new JButton("돌아가기");
-		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
-		menu.add(returnBtn);
-		
 		gui.getCon().revalidate();
 		gui.getCon().repaint();
 	}
@@ -75,17 +75,19 @@ public class guiServiceImpl extends Thread implements guiService {
 		
 		// list load, content = modify, delete
 		
+		JButton returnBtn = new JButton("돌아가기");
+		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
+		menu.add(returnBtn);
+		
 		JButton createBtn = new JButton("게시글 작성");
 		createBtn.addActionListener(btnFunc.getInstance().boardCreateBtn);
+		JTextField searchBar = new JTextField("", 25);
 		JButton searchBtn = new JButton("게시글 검색");
 		searchBtn.addActionListener(btnFunc.getInstance().boardSearchBtn);
 		
 		menu.add(createBtn);
+		menu.add(searchBar);
 		menu.add(searchBtn);
-		
-		JButton returnBtn = new JButton("돌아가기");
-		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
-		menu.add(returnBtn);
 		
 		gui.getCon().revalidate();
 		gui.getCon().repaint();
@@ -116,11 +118,15 @@ public class guiServiceImpl extends Thread implements guiService {
 		bottomList.setLayout(new FlowLayout(FlowLayout.CENTER));
 		bottom.add(bottomList, BorderLayout.SOUTH);
 		
+		JButton returnBtn = new JButton("돌아가기");
+		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
+		topMenu.add(returnBtn);
+		
 		// comment search, list
 		
 		JButton boardModifyBtn = new JButton("게시글 수정");
 		boardModifyBtn.addActionListener(btnFunc.getInstance().boardModifyBtn);
-		JButton boardDeleteBtn = new JButton("게시글 검색");
+		JButton boardDeleteBtn = new JButton("게시글 삭제");
 		boardDeleteBtn.addActionListener(btnFunc.getInstance().boardDeleteBtn);
 		
 		JButton commentCreateBtn = new JButton("댓글 작성");
@@ -137,10 +143,6 @@ public class guiServiceImpl extends Thread implements guiService {
 		bottomMenu.add(commentModifyBtn);
 		bottomMenu.add(commentDeleteBtn);
 		
-		JButton returnBtn = new JButton("돌아가기");
-		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
-		topMenu.add(returnBtn);
-		
 		gui.getCon().revalidate();
 		gui.getCon().repaint();
 	}
@@ -151,6 +153,10 @@ public class guiServiceImpl extends Thread implements guiService {
 		Container menu = new Container();
 		menu.setLayout(new FlowLayout(FlowLayout.CENTER));
 		gui.getCon().add(menu, BorderLayout.CENTER);
+		
+		JButton returnBtn = new JButton("돌아가기");
+		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
+		menu.add(returnBtn);
 		
 		JButton outBtn = new JButton("회원 강퇴");
 		outBtn.addActionListener(btnFunc.getInstance().adminMemberBtn);
@@ -165,10 +171,6 @@ public class guiServiceImpl extends Thread implements guiService {
 		menu.add(managerBtn);
 		menu.add(boardDeleteBtn);
 		menu.add(commentDeleteBtn);
-		
-		JButton returnBtn = new JButton("돌아가기");
-		returnBtn.addActionListener(btnFunc.getInstance().returnBtn);
-		menu.add(returnBtn);
 		
 		gui.getCon().revalidate();
 		gui.getCon().repaint();
