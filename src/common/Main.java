@@ -1,10 +1,11 @@
 package common;
+
 import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		controller ct = new controller();
+		controller ct = controller.getInstance();
 		boolean flag = true;
 		
 		while (flag) {
