@@ -9,11 +9,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 import common.myInfo;
+import oracle.jdbc.connector.OracleConnectionRequestInfo;
 
 
 public class boardServiceImpl implements boardService {
@@ -45,7 +47,7 @@ public class boardServiceImpl implements boardService {
 		dto.setBno(num);
 		Date date = new Date();
 		dto.setbTime(date);
-		
+
 
 		System.out.println("해당 게시글을 저장할 곳을 선택해주세요 : ");
 		System.out.println("1.C드라이브");
@@ -68,9 +70,9 @@ public class boardServiceImpl implements boardService {
 
 	public void boardFileRead() {
 		System.out.println("불러올 파일명 입력 : ");
-		
+
 		File ffile = new File("C:\\pro\\" + sc.next() +".txt");
-		
+
 		FileInputStream fis = null;
 		BufferedInputStream bis = null;
 		ObjectInputStream ois = null;
@@ -82,7 +84,7 @@ public class boardServiceImpl implements boardService {
 			ois.close();
 			bis.close();
 			fis.close();
-			
+
 			System.out.println("제목 : " +dto.getbTitle());
 			System.out.println("내용 : " +dto.getbContent());
 		} catch (Exception e) {
@@ -124,58 +126,138 @@ public class boardServiceImpl implements boardService {
 
 	public void boardDBSend(boardDTO dto) {
 		dao.insert(dto);
-
-
-
 	}
 
 	@Override
 	public void boardModify() {
-		dao.modify(dto);
+		System.out.println("삭제할 게시글 번호를 입력하세요.");
+		int bno = sc.nextInt();
+		dto = dao.search(bno);
+		if (myInfo.getInstance().id.equals(dto.getbWriter()) || myInfo.getInstance().admin == 1) {
+			System.out.print("제목 : ");
+			dto.setbTitle(sc.next());
+			System.out.println("내용 : ");
+			dto.setbContent(sc.next());
+			dao.modify(dto);
+		}
 	}
 
 	@Override
 	public void boardDelete() {
-		dao.delete(dto);
+		System.out.println("삭제할 게시글 번호를 입력하세요.");
+		int bno = sc.nextInt();
+		dto = dao.search(bno);
+		if (myInfo.getInstance().id.equals(dto.getbWriter()) || myInfo.getInstance().admin == 1) {
+			dao.delete(dto);
+		}
 	}
 
+	void dtoPrint(boardDTO d) {
+		System.out.print("글번호\t");
+		System.out.print("제목\t");
+		System.out.print("작성자\t");
+		System.out.println("작성시간\t");
+
+		System.out.print(d.getBno()+"\t");
+		System.out.print(d.getbTitle()+"\t");
+		System.out.print(d.getbWriter()+"\t");
+		System.out.println(d.getbTime()+"\t");
+	}
 	@Override
 	public ArrayList<boardDTO> boardList() {
 		list = dao.boardList();
-		for (boardDTO d : list) {
-			System.out.print(d.getBno()+"\t");
-			System.out.print(d.getbWriter()+"\t");
-			System.out.print(d.getbTitle()+"\t");
-			System.out.print(d.getbContent()+"\t");
-			System.out.print(d.getbTime()+"\t");
-			System.out.print(d.getInquiry()+"\t");
-			System.out.print(d.getReport());
+		int num2 =10;
+		int num = 1;
+		while(flag) {
+			for (boardDTO d : list) {
+				dtoPrint(d);
+				if (num > num2) {
+					break;
+				}else num++;
+
+			}
+
+			System.out.println("(p)다음페이지\t(n)이전페이지\t(s)제목으로 글 조회하기\t(r)되돌아가기");
+			String cmd = sc.next();
+
+			switch(cmd) {
+			case "p" :
+
+				for (boardDTO d : list) {
+					dtoPrint(d);
+					if (num+num2 > num2+num2) {
+						break;
+					}else {
+						num++;}
+				}
+				num2+=10;
+				break;
+			case "n" :
+				for (boardDTO d : list) {
+					dtoPrint(d);
+					if (num+num2 > num2+num2) {
+						break;
+					}else {
+						num++;}
+				}
+				num2-=10;
+				break;
+			case "s" :
+			{
+				System.out.print("제목을 입력해주세요 : ");
+				ArrayList<boardDTO> list = dao.search2(sc.next());
+				for (boardDTO d : list) {
+					dtoPrint(d);
+				}
+			}
+			break;
+
+			case "r":
+				flag = false;
+				break;
+			default :
+
+			}
 		}
-		//			(int bno, String bWriter, String bTitle, String bContent, Date bTime, int inquiry, int report)
+
+
+
 		return list;
+
+
 	}
 
 	@Override
 	public boardDTO boardSearch(int bno) {
-		boardDTO dto =  dao.search(bno);
-		
+		dto = dao.search(bno);
+
 		return dto;
 	}
+
 	@Override
 	public void boardContent() {
 		System.out.println("검색 글 번호입력: ");
-		boardDTO dto = boardSearch(sc.nextInt());
+		dto = boardSearch(sc.nextInt());
 		if(dto == null) {
 			System.out.println("존재하지 않는 글 입니다.");
 		}else {
-			System.out.print(dto.getbTitle());
-			System.out.print(dto.getbTime());
-			System.out.print(dto.getInquiry());
-			System.out.print(dto.getReport());
+			System.out.print("글번호\t");
+			System.out.print("제목\t");
+			System.out.print("작성시간\t");
+			System.out.print("조회수\t");
+			System.out.println("신고수");
+
+			System.out.print(dto.getBno()+"\t");
+			System.out.print(dto.getbTitle()+"\t");
+			System.out.print(dto.getbTime()+"\t");
+			System.out.print(dto.getInquiry()+"\t");
+			System.out.println(dto.getReport());
+
+			System.out.println("내용");
 			System.out.println(dto.getbContent());
 		}
-		
-		
+
+
 	}
 
 

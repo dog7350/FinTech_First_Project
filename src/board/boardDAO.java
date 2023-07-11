@@ -85,12 +85,12 @@ public class boardDAO {
 		
 	}
 	public int delete(boardDTO dd) {
-		String sql = "DELETE FROM BOARD WHERE B_WRITER = ? AND B_TITLE";
+		String sql = "DELETE FROM board WHERE bno = ?";
 		int result = 0;
 		try {
 			ps = db.getConnect().prepareStatement(sql);
-			ps.setString(1, dd.getbWriter());
-			ps.setString(2, dd.getbTitle());
+			ps.setInt(1, dd.getBno());
+			
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,7 +100,7 @@ public class boardDAO {
 	
 	public boardDTO search(int bno) {
 		boardDTO dto = null;
-		String sql = "SELECT * FROM BOARD WHERE BNO = '"+bno+"'";
+		String sql = "SELECT * FROM BOARD WHERE bno = '"+bno+"'";
 		try {
 			ps = db.getConnect().prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -114,6 +114,27 @@ public class boardDAO {
 		}
 		
 		return dto;
+		
+		
+		
+	}
+	public ArrayList<boardDTO> search2(String b_title) {
+		ArrayList<boardDTO> list = new ArrayList<>();
+		String sql = "SELECT * FROM board WHERE b_title LIKE '%"+b_title+"%'";
+		try {
+			ps = db.getConnect().prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				boardDTO dto = new boardDTO(rs.getInt("bno"), rs.getString("b_writer"),rs.getString("b_title"),rs.getString("b_content"),
+						rs.getDate("b_time"),rs.getInt("inquiry"),rs.getInt("report"));
+				
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 		
 		
 		
