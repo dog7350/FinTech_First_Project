@@ -106,6 +106,27 @@ public class commentDAO {
 		}
 		return list;
 	}
+	
+	public commentDTO cmtS(int bno, int cno) {
+		commentDTO dto = new commentDTO();
+		String sql = "SELECT * FROM cmt WHERE bno=? AND cno=?";
+		try {
+			ps = db.getConnect().prepareStatement(sql);
+			ps.setInt(1, bno);
+			ps.setInt(2, cno);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				dto.setBno(bno);
+				dto.setCno(cno);
+				dto.setcWriter(rs.getString("c_writer"));
+				dto.setcContent(rs.getString("c_content"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 
 	public int cmtMax(int bno) {
 		int num = 0;

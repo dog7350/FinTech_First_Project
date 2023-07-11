@@ -142,6 +142,8 @@ public class boardServiceImpl implements boardService {
 			System.out.println("내용 : ");
 			dto.setbContent(sc.next());
 			dao.modify(dto);
+		} else {
+			System.out.println("관리자도... 작성자도... 아닙니다...ㅡㅡ");
 		}
 	}
 
@@ -152,6 +154,8 @@ public class boardServiceImpl implements boardService {
 		dto = dao.search(bno);
 		if (myInfo.getInstance().id.equals(dto.getbWriter()) || myInfo.getInstance().admin == 1) {
 			dao.delete(dto);
+		} else {
+			System.out.println("관리자도... 작성자도... 아닙니다...ㅡㅡ");
 		}
 	}
 

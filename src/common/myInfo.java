@@ -18,6 +18,9 @@ public class myInfo {
 		this.email = email;
 		this.admin = admin;
 	}
+	public void resetInstance() {
+		instance = null;
+	}
 	
 	public String id, pw, name, addr, phone, email;
 	public int admin;

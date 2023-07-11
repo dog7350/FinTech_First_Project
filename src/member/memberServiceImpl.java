@@ -66,14 +66,7 @@ public class memberServiceImpl implements memberService {
 
 	@Override //정보수정
 	public void memberModify() {
-		while(true) {
-			System.out.println("정보수정 ID입력>>");
-			id=sc.next();
-			memberDTO d = search(id);
-			if(d != null)
-				break;
-			System.out.println("존재하지 않는 ID입니다.");	
-		}
+		memberDTO d = search(myInfo.getInstance().id);
 		
 		System.out.println("정보수정 PW입력>>");
 		pw=sc.next();
@@ -86,9 +79,8 @@ public class memberServiceImpl implements memberService {
 		System.out.println("정보수정 이메일입력>>");
 		email=sc.next();
 		System.out.println("관리자여부(일반회원일 경우 0입력/관리자인경우 1입력)>>");
-		int admin = sc.nextInt();
 		
-		memberDTO d = new memberDTO(id,pw,name,addr,phone,email,admin);
+		d = new memberDTO(id,pw,name,addr,phone,email,d.getAdmin());
 		int result = modify(d);
 		
 		if(result==1) 
@@ -99,16 +91,11 @@ public class memberServiceImpl implements memberService {
 
 	@Override //회원탈퇴
 	public void memberExit() {
-		System.out.println("탈퇴할 ID입력>>");
-		id=sc.next();
-		
-		int result=dao.memberOut(id);
+		int result=dao.memberOut(myInfo.getInstance().id);
 		if(result==1)
 			System.out.println("탈퇴되었습니다.");
 		else
 			System.out.println("탈퇴실패");
-		
-		
 	}
 
 	@Override // 관리자 : 회원 강퇴

@@ -62,7 +62,7 @@ public class memberDAO {
 	}
 	
 	public int modify(memberDTO d) {
-		String sql = "update member set pw=?,name=?,addr=?,phone=?,email=?,admin=0 where id=?";
+		String sql = "update member set pw=?,name=?,addr=?,phone=?,email=?,admin=" + d.getAdmin() + " where id=?";
 		int result =0;
 		try {
 			ps=db.getConnect().prepareStatement(sql);
@@ -126,7 +126,7 @@ public class memberDAO {
 	}
 	
 	public int memberManager(String id) {
-		String sql="update member set admin='1' where id=?";
+		String sql="update member set admin=1 where id=?";
 		int result =0;
 		try {
 			ps=db.getConnect().prepareStatement(sql);
@@ -145,87 +145,13 @@ public class memberDAO {
 		try {
 			ps=db.getConnect().prepareStatement(sql);
 			ps.setString(1,  id);
+			System.out.println("before : " + id);
 			result=ps.executeUpdate();
+			System.out.println("after");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return result;
 	}
-	
-
-	
-	
 }//class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

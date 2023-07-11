@@ -64,7 +64,7 @@ public class boardDAO {
 
 	
 	public int modify(boardDTO md) {
-		String sql = "UPDATE BOARD SET B_TITLE = ?,B_CONTANT = ?";
+		String sql = "UPDATE BOARD SET B_TITLE = ?,B_CONTANT = ? WHERE bno=" + md.getBno();
 		int result = 0;
 		try {
 			ps = db.getConnect().prepareStatement(sql);

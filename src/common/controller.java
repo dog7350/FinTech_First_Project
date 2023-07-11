@@ -42,9 +42,20 @@ public class controller {
 					boardOpt();
 					break;
 				case "comment" :
+					if (loginStatus()) {
+						System.out.println("로그인하세요.");
+						break;
+					}
 					commentOpt();
 					break;
 				case "admin" :
+					if (loginStatus()) {
+						System.out.println("로그인하세요.");
+						break;
+					} else if (adminStatus()) {
+						System.out.println("관리자가 아닙니다.");
+						break;
+					}
 					adminOpt();
 					break;
 				case "return" :
@@ -54,11 +65,21 @@ public class controller {
 		}
 	}
 	
+	boolean loginStatus() {
+		if (myInfo.getInstance().id == null) return true;
+		else return false;
+	}
+	
+	boolean adminStatus() {
+		if (myInfo.getInstance().admin == 0) return true;
+		else return false;
+	}
+	
 	void memberOpt() {
 		boolean flag = true;
 		
 		while (flag) {
-			//screen.clear();
+			screen.clear();
 			System.out.print("join : 회원가입\nlogin : 로그인\nmodify : 정보 수정\nexit : 회원 탈퇴\nreturn : 돌아가기\n명령어 입력\n>> ");
 			switch (sc.next()) {
 				case "join" :
@@ -68,9 +89,17 @@ public class controller {
 					member.memberLogin();
 					break;
 				case "modify" :
+					if (loginStatus()) {
+						System.out.println("로그인하세요.");
+						break;
+					}
 					member.memberModify();
 					break;
 				case "exit" :
+					if (loginStatus()) {
+						System.out.println("로그인하세요.");
+						break;
+					}
 					member.memberExit();
 					break;
 				case "return" :
