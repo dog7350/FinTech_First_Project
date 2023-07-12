@@ -30,18 +30,6 @@ public class guiBtnFunction {
 			controller.getInstance().gui.memberDisplay();
 		}
 	};
-	public ActionListener mainBoardBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			controller.getInstance().gui.boardDisplay();
-		}
-	};
-	public ActionListener mainCommentBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			controller.getInstance().gui.contentDisplay();
-		}
-	};
 	public ActionListener mainAdminBtn = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -54,28 +42,22 @@ public class guiBtnFunction {
 	public ActionListener memberJoinBtn = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			controller.getInstance().gui.jmDisplay("join");
 		}
 	};
 	
-	public ActionListener memberLoginBtn = new ActionListener() {
+	public ActionListener memberLogoutBtn = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			guiInfo.getInstance().resetInstance();
+			controller.getInstance().gui.mainDisplay();
 		}
 	};
 	
 	public ActionListener memberModifyBtn = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	public ActionListener memberExitBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
+			controller.getInstance().gui.jmDisplay("modify");
 		}
 	};
 	
@@ -84,75 +66,20 @@ public class guiBtnFunction {
 	public ActionListener boardCreateBtn = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			controller.getInstance().gui.bcmDisplay("create", -1);
 		}
 	};
 	
-	public ActionListener boardModifyBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	public ActionListener boardDeleteBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	public ActionListener boardList = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	public ActionListener boardSearchBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	////////////////////////////////////////////////////////////
-	
-	public ActionListener commentCreateBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	public ActionListener commentModifyBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	public ActionListener commentDeleteBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	public ActionListener commentList = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	public ActionListener commentSearchBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
+	public ActionListener boardModify(int bno) {
+		ActionListener modify = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.getInstance().gui.bcmDisplay("modify", bno);
+			}
+		};
+		return modify;
+	}
+
 	////////////////////////////////////////////////////////////
 	
 	public ActionListener adminMemberBtn = new ActionListener() {

@@ -16,13 +16,13 @@ public class boardDAO {
 	}
 
 	public int insert(boardDTO dto) {
-		String sql = "INSERT INTO board VALUES(1, ?, ?, ?, sysdate, 0, 0)";
+		String sql = "INSERT INTO board VALUES(board_SEQ.NEXTVAL, ?, ?, ?, sysdate, 0, 0)";
 		int result = 0;
 		
-
 		try {
 			ps = db.getConnect().prepareStatement(sql);
-			ps.setString(1, myInfo.getInstance().id);
+			if (dto.getbWriter() == null) ps.setString(1, myInfo.getInstance().id);
+			else ps.setString(1, dto.getbWriter());
 			ps.setString(2, dto.getbTitle());
 			ps.setString(3, dto.getbContent());
 			
@@ -31,14 +31,10 @@ public class boardDAO {
 			 * Update : select를 제외한 모든 명령어에서 사용한다.
 			 */
 			result = ps.executeUpdate();
-			//			ps.executeQuery();
-			return result;
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return 0;
-
+		return result;
 	}
 	
 	public ArrayList<boardDTO> boardList() {
@@ -64,14 +60,12 @@ public class boardDAO {
 
 	
 	public int modify(boardDTO md) {
-		String sql = "UPDATE BOARD SET B_TITLE = ?,B_CONTANT = ? WHERE bno=" + md.getBno();
+		String sql = "UPDATE BOARD SET B_TITLE = ?, B_CONTENT = ? WHERE bno=" + md.getBno();
 		int result = 0;
 		try {
 			ps = db.getConnect().prepareStatement(sql);
 			ps.setString(1, md.getbTitle());
 			ps.setString(2, md.getbContent());
-			
-			
 			
 			result = ps.executeUpdate();
 		} catch (Exception e) {
