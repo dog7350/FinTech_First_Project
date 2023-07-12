@@ -126,9 +126,6 @@ public class boardDAO {
 		}
 		
 		return list;
-		
-		
-		
 	}
 	
 	

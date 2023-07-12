@@ -80,19 +80,4 @@ public class guiBtnFunction {
 		return modify;
 	}
 
-	////////////////////////////////////////////////////////////
-	
-	public ActionListener adminMemberBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
-	
-	public ActionListener adminManagerBtn = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	};
 }

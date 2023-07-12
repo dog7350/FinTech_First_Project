@@ -369,14 +369,19 @@ public class guiServiceImpl extends Thread implements guiService {
 			cmtM.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+					if (c.getcWriter().equals(guiInfo.getInstance().id) || guiInfo.getInstance().admin == 1) {
+						cmtModify(bno, c);
+					}
 				}
 			});
 			JButton cmtD = new JButton("삭제");
 			cmtD.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+					if (c.getcWriter().equals(guiInfo.getInstance().id) || guiInfo.getInstance().admin == 1) {
+						cmDAO.cmtDelete(c.getBno(), c.getCno());
+						contentDisplay(bno);
+					}
 				}
 			});
 			JLabel cmt = new JLabel(c.getcWriter() + " : " + c.getcContent());
@@ -389,6 +394,37 @@ public class guiServiceImpl extends Thread implements guiService {
 		gui.getCon().revalidate();
 		gui.getCon().repaint();
 	}
+	
+	void cmtModify(int bno, commentDTO cmt) {
+		gui.getCon().removeAll();
+		Container menu = new Container();
+		menu.setLayout(new FlowLayout(FlowLayout.LEFT));
+		gui.getCon().add(menu, BorderLayout.NORTH);
+		
+		JButton returnBtn = new JButton("돌아가기"); // 완료
+		returnBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				contentDisplay(bno);
+			}
+		});
+		menu.add(returnBtn);
+
+		JTextField comment = new JTextField("", 30);
+		JButton submit = new JButton("submit");
+		submit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cmDAO.cmtModify(bno, cmt.getCno(), comment.getText());
+				contentDisplay(bno);
+			}
+		});
+		menu.add(submit);
+		menu.add(comment);
+		
+		gui.getCon().revalidate();
+		gui.getCon().repaint();
+	}
 
 	@Override
 	public void adminDisplay() {
@@ -396,19 +432,46 @@ public class guiServiceImpl extends Thread implements guiService {
 		Container menu = new Container();
 		menu.setLayout(new GridLayout(0, 2));
 		gui.getCon().add(menu, BorderLayout.CENTER);
-		
-		JButton outBtn = new JButton("회원 강퇴");
-		outBtn.addActionListener(btnFunc.getInstance().adminMemberBtn);
+
 		JTextField outTxt = new JTextField("", 25);
-		JButton managerBtn = new JButton("관리자 임명");
-		managerBtn.addActionListener(btnFunc.getInstance().adminManagerBtn);
+		JButton outBtn = new JButton("회원 강퇴"); // 완료
+		outBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mbDAO.memberOut(outTxt.getText());
+				outTxt.setText("퇴출");
+			}
+		});
 		JTextField managerTxt = new JTextField("", 25);
-		JButton boardDeleteBtn = new JButton("게시글 삭제");
-		//boardDeleteBtn.addActionListener(btnFunc.getInstance().boardDeleteBtn);
-		JTextField boardTxt = new JTextField("", 25);
-		JButton commentDeleteBtn = new JButton("댓글 삭제");
-		//commentDeleteBtn.addActionListener(btnFunc.getInstance().commentDeleteBtn);
-		JTextField commentTxt = new JTextField("", 25);
+		JButton managerBtn = new JButton("관리자 임명"); // 완료
+		managerBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mbDAO.memberManager(managerTxt.getText());
+				managerTxt.setText("임명");
+			}
+		});
+		JTextField boardTxt = new JTextField("", 25); // 완료
+		JButton boardDeleteBtn = new JButton("게시글 삭제 (입력 : bno)");
+		boardDeleteBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boardDTO dto = new boardDTO();
+				dto.setBno(Integer.parseInt(boardTxt.getText()));
+				boDAO.delete(dto);
+				boardTxt.setText("삭제 완료");
+			}
+		});
+		JTextField commentTxt = new JTextField("", 25); // 완료
+		JButton commentDeleteBtn = new JButton("댓글 삭제 (입력 : bno/cno)");
+		commentDeleteBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String[] str = commentTxt.getText().split("/");
+				cmDAO.cmtDelete(Integer.parseInt(str[0]), Integer.parseInt(str[1]));
+				commentTxt.setText("삭제 완료");
+			}
+		});
 
 		menu.add(outBtn);
 		menu.add(outTxt);
